@@ -59,7 +59,7 @@ model_basic = AzureOpenAI(
 
 
 def for_general_conversation(query):
-    query = query + ". Make the answer Concise in 3 lines"
+    query = query + ". Make the answer Concise in 1 lines"
     response = model_chat([HumanMessage(content=query)])
     response = list(response)[0][1]
     print(response)
@@ -74,10 +74,12 @@ def QnA(query, data_path):
         agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
     )
     return agent.run(query)
+SPEECH_KEY = 'a991d83e4f7d4861bd6707133c9db66a'
+SPEECH_REGION = 'eastus'
+
 
 def Speak_text_azure(text):
-    SPEECH_KEY = 'a991d83e4f7d4861bd6707133c9db66a'
-    SPEECH_REGION = 'eastus'
+    
     print('Speaker called')
     # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
     speech_config = speechsdk.SpeechConfig(subscription=SPEECH_KEY, region=SPEECH_REGION)
@@ -90,3 +92,28 @@ def Speak_text_azure(text):
     
     # Get text from the console and synthesize to the default speaker.
     speech_synthesis_result = speech_synthesizer.speak_text_async(text).get()
+
+
+def recognize_from_microphone():
+    # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
+    speech_config = speechsdk.SpeechConfig(subscription=SPEECH_KEY, region=SPEECH_REGION)
+    speech_config.speech_recognition_language="en-IN"
+
+    audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
+    speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
+
+    print("Speak into your microphone.")
+    speech_recognition_result = speech_recognizer.recognize_once_async().get()
+
+    if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
+        print("Recognized: {}".format(speech_recognition_result.text))
+        return speech_recognition_result.text
+    elif speech_recognition_result.reason == speechsdk.ResultReason.NoMatch:
+        print("No speech could be recognized: {}".format(speech_recognition_result.no_match_details))
+    elif speech_recognition_result.reason == speechsdk.ResultReason.Canceled:
+        cancellation_details = speech_recognition_result.cancellation_details
+        print("Speech Recognition canceled: {}".format(cancellation_details.reason))
+        if cancellation_details.reason == speechsdk.CancellationReason.Error:
+            print("Error details: {}".format(cancellation_details.error_details))
+            print("Did you set the speech resource key and region values?")
+

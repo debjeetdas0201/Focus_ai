@@ -1,10 +1,10 @@
-from src.voice_main import activate_conv_ai
-from src.utils import Speak_text_azure
+from scr.voice_main import activate_conv_ai
+from scr.utils import Speak_text_azure
 import streamlit as st
 from PIL import Image
 import cv2
 import time
-from src.camera import video_frame_callback
+from scr.camera import video_frame_callback
 # image1 = Image.open('favicon.ico')
 
 # st.set_page_config(

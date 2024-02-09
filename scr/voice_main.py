@@ -1,6 +1,6 @@
 import speech_recognition as spr
 import streamlit as st
-from src.utils import Speak_text_azure, QnA, for_general_conversation
+from scr.utils import Speak_text_azure, QnA, for_general_conversation, recognize_from_microphone
 import webbrowser as wb
 
 data_path = 'Wesco Data.csv'
@@ -8,7 +8,7 @@ data_path = 'Wesco Data.csv'
 # Main function to invoke GenX
 def activate_conv_ai():
     # recog1=spr.Recognizer()
-    recog=spr.Recognizer()
+    # recog=spr.Recognizer()
     mic=spr.Microphone()
 
     # with mic as source:
@@ -25,14 +25,16 @@ def activate_conv_ai():
     with mic as source:
         # Speak_text_azure("Hi, how may i help you today")
         # speak_text("Hi, How may i help you today")
-        print("You can speak now:\n")
+        
         # st.write("You can speak now:\n")
         
         # placeholder= st.image('AI Loader Exploration - GIF.gif')
-        audio=recog.listen(source, phrase_time_limit = 7)
-        
+        # audio=recog.listen(source, phrase_time_limit = 3)
+        get_text = recognize_from_microphone()
         try:
-            get_text=recog.recognize_google(audio)
+            # get_text=recog.recognize_google(audio)
+            # print("You can speak now:\n")
+            # get_text = speech_to_text()
             # placeholder.empty()
             # placeholder= st.image('ios_7.gif')
             print("You said:",get_text)
@@ -68,7 +70,7 @@ def activate_conv_ai():
             #     resp_qna = QnA(get_text, data_path)
             #     resp_qna = resp_qna.split('<')[0]
             #     Speak_text_azure(f'Answer for {get_text} is {resp_qna}')
-            elif 'bye' in recog.recognize_google(audio) and 'ok' in recog.recognize_google(audio):
+            elif 'bye' in get_text and 'ok' in get_text:
                 return True
             else:
                 # Conside the response to 40-50 words
