@@ -1,4 +1,4 @@
-from scr.voice_main import activate_conv_ai
+from voice_main_v2 import activate_conv_ai
 from scr.utils import Speak_text_azure
 import streamlit as st
 from PIL import Image

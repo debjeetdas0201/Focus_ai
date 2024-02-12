@@ -2,38 +2,41 @@ import speech_recognition as spr
 import streamlit as st
 from scr.utils import Speak_text_azure, QnA, for_general_conversation, recognize_from_microphone
 import webbrowser as wb
+from whisper_mic import WhisperMic
 
 data_path = 'Wesco Data.csv'
+
+
+def whisper_mic_new():
+    
+    mic = WhisperMic()
+    print('Speak now:')
+    result = mic.listen()
+    return result
+
 
 # Main function to invoke GenX
 def activate_conv_ai():
     # recog1=spr.Recognizer()
     # recog=spr.Recognizer()
-    mic=spr.Microphone()
+    # mic=spr.Microphone()
 
-    # with mic as source:
-    #         print("Say Cora to initiate")
-    #         placeholder= st.image('Your voice counts iG post.png')
-    #         # st.write("Say Cora to initiate")
-    #         audio=recog1.listen(source)
-    #         placeholder.empty()
-    # # Speak 
-    # if 'a' in recog1.recognize_google(audio) or "r" in recog1.recognize_google(audio):
-    #     print(recog1.recognize_google(audio))
-    #     recog1 = spr.Recognizer()
+
         
     with mic as source:
-        # Speak_text_azure("Hi, how may i help you today")
+        Speak_text_azure("Hi, how may i help you today")
         # speak_text("Hi, How may i help you today")
         
         # st.write("You can speak now:\n")
         
         # placeholder= st.image('AI Loader Exploration - GIF.gif')
         # audio=recog.listen(source, phrase_time_limit = 3)
-        get_text = recognize_from_microphone()
+        # get_text = recognize_from_microphone()
+        
+
         try:
             # get_text=recog.recognize_google(audio)
-            # print("You can speak now:\n")
+            print("You can speak now:\n")
             # get_text = speech_to_text()
             # placeholder.empty()
             # placeholder= st.image('ios_7.gif')

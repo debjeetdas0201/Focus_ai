@@ -1,5 +1,5 @@
 import os
-
+import time
 import azure.cognitiveservices.speech as speechsdk
 
 from langchain.chat_models import AzureChatOpenAI
@@ -102,18 +102,37 @@ def recognize_from_microphone():
     audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
     speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
 
-    print("Speak into your microphone.")
-    speech_recognition_result = speech_recognizer.recognize_once_async().get()
+    done = False
+    def stop_cb(evt):
+        print('CLOSING on {}'.format(evt))
+        speech_recognizer.stop_continuous_recognition()
+        nonlocal done
+        done = True
 
-    if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
-        print("Recognized: {}".format(speech_recognition_result.text))
-        return speech_recognition_result.text
-    elif speech_recognition_result.reason == speechsdk.ResultReason.NoMatch:
-        print("No speech could be recognized: {}".format(speech_recognition_result.no_match_details))
-    elif speech_recognition_result.reason == speechsdk.ResultReason.Canceled:
-        cancellation_details = speech_recognition_result.cancellation_details
-        print("Speech Recognition canceled: {}".format(cancellation_details.reason))
-        if cancellation_details.reason == speechsdk.CancellationReason.Error:
-            print("Error details: {}".format(cancellation_details.error_details))
-            print("Did you set the speech resource key and region values?")
+
+
+    speech_recognizer.session_stopped.connect(stop_cb)
+    speech_recognizer.canceled.connect(stop_cb)
+
+    print("Speak into your microphone.")
+    # speech_recognition_result = speech_recognizer.recognize_once_async().get()
+    speech_recognition_result = speech_recognizer.start_continuous_recognition()
+    while not done:
+        time.sleep(.5)
+
+
+    # if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
+    #     print("Recognized: {}".format(speech_recognition_result.text))
+        
+    # elif speech_recognition_result.reason == speechsdk.ResultReason.NoMatch:
+    #     print("No speech could be recognized: {}".format(speech_recognition_result.no_match_details))
+    # elif speech_recognition_result.reason == speechsdk.ResultReason.Canceled:
+    #     cancellation_details = speech_recognition_result.cancellation_details
+    #     print("Speech Recognition canceled: {}".format(cancellation_details.reason))
+    #     if cancellation_details.reason == speechsdk.CancellationReason.Error:
+    #         print("Error details: {}".format(cancellation_details.error_details))
+    #         print("Did you set the speech resource key and region values?")
+
+
+    return speech_recognition_result.text
 
