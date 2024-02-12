@@ -1,6 +1,7 @@
 import os
 import time
 import azure.cognitiveservices.speech as speechsdk
+import speech_recognition as sr
 
 from langchain.chat_models import AzureChatOpenAI
 from langchain.schema import HumanMessage
@@ -12,6 +13,8 @@ from langchain.llms import OpenAI
 from langchain_experimental.agents.agent_toolkits import create_csv_agent
 
 from dotenv import load_dotenv
+
+import streamlit as st
 
 load_dotenv()
 
@@ -25,12 +28,12 @@ load_dotenv()
 # EMBEDDINGS_MODEL = os.getenv("EMBEDDINGS_MODEL")
 # EMBEDDINGS_MODEL_DEPLOYMENT_NAME = os.getenv("EMBEDDINGS_MODEL_DEPLOYMENT_NAME")
 
-OPENAI_API_KEY = "6b7202a499884f3193b3f4acc2b074fb"
+OPENAI_API_KEY = "b7d5aa82d15a4b99a1c730f681ec2bbc"
 OPENAI_API_TYPE = "azure"
 OPENAI_API_VERSION = "2023-07-01-preview"
-OPENAI_API_BASE = "https://openai-poc-app-dev.openai.azure.com/"
+OPENAI_API_BASE = "https://hmh-digitalhub-azure-openai.openai.azure.com/"
 CHAT_MODEL = "gpt-35-turbo"
-CHAT_MODEL_DEPLOYMENT_NAME = "GenpactGpt"
+CHAT_MODEL_DEPLOYMENT_NAME = "gpt-35-turbo"
 EMBEDDINGS_MODEL = "text-embedding-ada-002"
 EMBEDDINGS_MODEL_DEPLOYMENT_NAME = "text-embedding-ada-002"
 
@@ -74,65 +77,55 @@ def QnA(query, data_path):
         agent_type=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
     )
     return agent.run(query)
+
 SPEECH_KEY = 'a991d83e4f7d4861bd6707133c9db66a'
 SPEECH_REGION = 'eastus'
 
+# Set up Azure Speech-to-Text and Text-to-Speech credentials
+speech_key = SPEECH_KEY
+service_region = "eastus"
+speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
+# Set up Azure Text-to-Speech language 
+speech_config.speech_synthesis_language = "en-US"
 
-def Speak_text_azure(text):
+# Set up the voice configuration
+speech_config.speech_synthesis_voice_name = "en-US-JennyNeural"
+speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config)
+
+# Define the text-to-speech function
+def text_to_speech(text):
     
-    print('Speaker called')
-    # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
-    speech_config = speechsdk.SpeechConfig(subscription=SPEECH_KEY, region=SPEECH_REGION)
-    audio_config = speechsdk.audio.AudioOutputConfig(use_default_speaker=True)
-    
-    # The language of the voice that speaks.
-    speech_config.speech_synthesis_voice_name='en-US-JennyNeural'
-    
-    speech_synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
-    
-    # Get text from the console and synthesize to the default speaker.
-    speech_synthesis_result = speech_synthesizer.speak_text_async(text).get()
+    try:
+        placeholder = st.image('static/Bot.gif')
+        result = speech_synthesizer.speak_text_async(text).get()
+        if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
+            print("Text-to-speech conversion successful.")
+            return True
+        else:
+            print(f"Error synthesizing audio: {result}")
+            return False
+    except Exception as ex:
+        print(f"Error synthesizing audio: {ex}")
+        return False
+    finally:
+        placeholder.empty()
 
 
-def recognize_from_microphone():
-    # This example requires environment variables named "SPEECH_KEY" and "SPEECH_REGION"
-    speech_config = speechsdk.SpeechConfig(subscription=SPEECH_KEY, region=SPEECH_REGION)
-    speech_config.speech_recognition_language="en-IN"
-
-    audio_config = speechsdk.audio.AudioConfig(use_default_microphone=True)
-    speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config)
-
-    done = False
-    def stop_cb(evt):
-        print('CLOSING on {}'.format(evt))
-        speech_recognizer.stop_continuous_recognition()
-        nonlocal done
-        done = True
-
-
-
-    speech_recognizer.session_stopped.connect(stop_cb)
-    speech_recognizer.canceled.connect(stop_cb)
-
-    print("Speak into your microphone.")
-    # speech_recognition_result = speech_recognizer.recognize_once_async().get()
-    speech_recognition_result = speech_recognizer.start_continuous_recognition()
-    while not done:
-        time.sleep(.5)
-
-
-    # if speech_recognition_result.reason == speechsdk.ResultReason.RecognizedSpeech:
-    #     print("Recognized: {}".format(speech_recognition_result.text))
-        
-    # elif speech_recognition_result.reason == speechsdk.ResultReason.NoMatch:
-    #     print("No speech could be recognized: {}".format(speech_recognition_result.no_match_details))
-    # elif speech_recognition_result.reason == speechsdk.ResultReason.Canceled:
-    #     cancellation_details = speech_recognition_result.cancellation_details
-    #     print("Speech Recognition canceled: {}".format(cancellation_details.reason))
-    #     if cancellation_details.reason == speechsdk.CancellationReason.Error:
-    #         print("Error details: {}".format(cancellation_details.error_details))
-    #         print("Did you set the speech resource key and region values?")
-
-
-    return speech_recognition_result.text
+def speechrecognition(): 
+    r = sr.Recognizer()
+    with sr.Microphone() as source: 
+        placeholder = st.image('static/Human.gif')
+        print("Listening.....") 
+        r.pause_threshold = 2
+        audio = r.listen(source, 0,6)
+    try:
+        print("Recogizing....")
+        query = r.recognize_google(audio) 
+        return query.lower()
+    except sr.UnknownValueError:
+        print("Unable to understand")
+    except sr.RequestError as e:
+        print("Unable to provide required output".format(e))
+    finally:
+        placeholder.empty()
 
