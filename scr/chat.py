@@ -4,6 +4,7 @@ from langchain.embeddings import OpenAIEmbeddings
 from langchain.chains import ConversationalRetrievalChain
 from dotenv import load_dotenv
 from langchain.chat_models import AzureChatOpenAI
+from langchain.prompts import PromptTemplate
 
 load_dotenv()
 
@@ -17,48 +18,62 @@ CHAT_MODEL_DEPLOYMENT_NAME  = os.getenv("CHAT_MODEL_DEPLOYMENT_NAME")
 EMBEDDINGS_MODEL = os.getenv("EMBEDDINGS_MODEL")
 EMBEDDINGS_MODEL_DEPLOYMENT_NAME = os.getenv("EMBEDDINGS_MODEL_DEPLOYMENT_NAME")
 
+prompt_template_manager = """Answer the manager's questions based on the below context and data. If the context doesn't contain any relevant information to the question, search from the internet and answer the query.
+    Keep the response conscise in 2 line. Only use relevant data.
 
-from langchain.prompts import PromptTemplate
-prompt_template = """Answer the user's questions based on the below context. If the context doesn't contain any relevant information to the question, search from the internet and answer the query":
-Keeep the response conscise in 2 line.
+    {context}
 
-{context}
+    Question: {question}
+    Answer:"""
 
-Question: {question}
-Answer:"""
-PROMPT = PromptTemplate(
-    template=prompt_template, input_variables=["context", "question"]
-)
+prompt_template_agent = """Answer the agent's questions based on the below context and data. If the context doesn't contain any relevant information to the question, search from the internet and answer the query.
+    Keep the response conscise in 2 line. Only use relevant data.
 
-chain_type_kwargs = {"prompt": PROMPT}
+    {context}
 
+    Question: {question}
+    Answer:"""
 
+prompt_template_cxo = """Answer the cxo's questions based on the below context and data. If the context doesn't contain any relevant information to the question, search from the internet and answer the query.
+    Keep the response conscise in 2 line. Only use relevant data.
 
-def load_changes():
-    if OPENAI_API_KEY is not None:
-        embeddings = OpenAIEmbeddings()
-        db = FAISS.load_local("faiss_index", embeddings)
-        retriever = db.as_retriever()
-        global qa 
+    {context}
 
-        model = AzureChatOpenAI(
-            openai_api_type = OPENAI_API_TYPE,
-            openai_api_base = OPENAI_API_BASE,
-            openai_api_version = OPENAI_API_VERSION,
-            openai_api_key = OPENAI_API_KEY,
-            model_name = CHAT_MODEL,
-            deployment_name = CHAT_MODEL_DEPLOYMENT_NAME,
-            temperature=0.7
-            )
-        qa = ConversationalRetrievalChain.from_llm(
-            model, 
-            retriever=retriever, 
-            return_source_documents=False,
-            combine_docs_chain_kwargs=chain_type_kwargs
-            )
-        return "Ready"
+    Question: {question}
+    Answer:"""
+
+def load_changes(persona):
+    if persona == "Agent":
+        prompt_template = prompt_template_agent
+    elif persona == "Manager":
+        prompt_template = prompt_template_manager
     else:
-        return "You forgot OpenAI API key"
+        prompt_template = prompt_template_cxo
+    PROMPT = PromptTemplate(
+        template=prompt_template, input_variables=["context", "question"]
+    )
+
+    chain_type_kwargs = {"prompt": PROMPT}
+
+    embeddings = OpenAIEmbeddings()
+    db = FAISS.load_local("faiss_index/faiss_index_"+ persona.lower(), embeddings)
+    retriever = db.as_retriever()
+    global qa 
+    model = AzureChatOpenAI(
+        openai_api_type = OPENAI_API_TYPE,
+        openai_api_base = OPENAI_API_BASE,
+        openai_api_version = OPENAI_API_VERSION,
+        openai_api_key = OPENAI_API_KEY,
+        model_name = CHAT_MODEL,
+        deployment_name = CHAT_MODEL_DEPLOYMENT_NAME,
+        temperature=0.7
+        )
+    qa = ConversationalRetrievalChain.from_llm(
+        model, 
+        retriever=retriever, 
+        return_source_documents=False,
+        combine_docs_chain_kwargs=chain_type_kwargs
+        )
 
 def add_text(history, text):
     history = history + [(text, None)]

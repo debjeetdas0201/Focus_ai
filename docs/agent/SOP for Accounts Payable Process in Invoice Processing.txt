@@ -1,0 +1,58 @@
+Standard Operating Procedure (SOP) for Accounts Payable Process in Invoice Processing
+
+Objective:
+To establish a standardized and efficient process for the management of accounts payable, ensuring accurate recording, timely payment, and effective communication with vendors.
+
+Scope:
+This SOP covers the entire accounts payable process, from the receipt of invoices to the generation of payment and reconciliation.
+
+Responsibilities:
+
+Accounts Payable Team:
+
+Receive and review incoming invoices for accuracy and compliance.
+Record invoice details in the accounts payable system.
+Verify the availability of funds and budget allocation for each invoice.
+Obtain necessary approvals from relevant departments for invoice payment.
+Process and schedule payments to vendors in a timely manner.
+Procurement Department:
+
+Collaborate with the Accounts Payable Team to ensure the accuracy of vendor details on invoices.
+Provide purchase orders and other supporting documentation to validate invoice charges.
+Finance Department:
+
+Reconcile accounts payable ledger with the general ledger regularly.
+Generate financial reports related to accounts payable aging, cash flow, and outstanding liabilities.
+Ensure compliance with accounting standards and regulations.
+Procedure:
+
+Invoice Receipt and Review:
+a. The Accounts Payable Team receives invoices from vendors.
+b. Invoices are reviewed for accuracy, completeness, and compliance with company policies.
+c. Discrepancies are communicated to the vendor for resolution.
+
+Invoice Recording:
+a. Invoice details, including the invoice number, vendor details, date of receipt, and amount, are recorded in the accounts payable system.
+b. Supporting documents such as purchase orders and delivery receipts are attached to the invoice record.
+
+Approval Process:
+a. Invoices are routed to the relevant department for approval based on predetermined authorization levels.
+b. Approvers verify the accuracy and legitimacy of the charges before granting approval.
+
+Payment Processing:
+a. Approved invoices are scheduled for payment based on agreed-upon payment terms.
+b. Payments are processed through the chosen payment method (e.g., checks, electronic funds transfer).
+c. Payment details are updated in the accounts payable system.
+
+Reconciliation and Reporting:
+a. The Finance Department reconciles the accounts payable ledger with the general ledger.
+b. Reports on accounts payable aging, cash flow, and outstanding liabilities are generated monthly.
+c. Any discrepancies are investigated and resolved promptly.
+
+Documentation:
+
+Copies of all received and processed invoices.
+Records of communication with vendors regarding discrepancies.
+Monthly reports on accounts payable aging, cash flow, and outstanding liabilities.
+Review and Continuous Improvement:
+This SOP should be reviewed periodically to ensure its effectiveness. Feedback from team members, stakeholders, and any identified areas for improvement should be considered and incorporated into the process.

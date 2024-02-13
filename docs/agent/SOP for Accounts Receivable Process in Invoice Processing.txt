@@ -1,0 +1,53 @@
+Standard Operating Procedure (SOP) for Accounts Receivable Process in Invoice Processing
+
+Objective:
+To ensure efficient and accurate processing of accounts receivable, timely collection of outstanding invoices, and maintenance of positive relationships with clients and vendors.
+
+Scope:
+This SOP covers the entire accounts receivable process within the invoice processing system, starting from the generation of invoices to the collection of payments.
+
+Responsibilities:
+
+Accounts Receivable Team:
+
+Generate and send invoices to clients promptly.
+Maintain accurate records of all transactions in the accounts receivable ledger.
+Monitor and follow up on outstanding invoices to ensure timely payments.
+Collaborate with other departments, such as Sales and Customer Service, to address customer inquiries and resolve issues related to invoices.
+Finance Department:
+
+Review and reconcile accounts receivable ledger regularly.
+Provide necessary support and documentation during internal and external audits.
+Generate periodic reports on accounts receivable aging, cash flow, and collections performance.
+Procedure:
+
+Invoice Generation:
+a. Upon completion of a sale or service, the Sales Department provides details of the transaction to the Accounts Receivable Team.
+b. The Accounts Receivable Team generates an invoice, ensuring accuracy in terms of product/service description, quantity, price, and applicable taxes.
+c. Invoices are then sent to clients through the preferred communication channel (email, mail, etc.).
+
+Invoice Recording:
+a. The Accounts Receivable Team records the details of each invoice in the accounts receivable ledger using the organization's accounting software.
+b. Information includes invoice number, client details, date of issuance, due date, and the total amount.
+
+Invoice Monitoring and Follow-Up:
+a. The team monitors the accounts receivable aging report regularly to identify overdue invoices.
+b. Automated reminders are sent to clients as the due date approaches.
+c. For overdue invoices, the team initiates direct communication with the client through phone or email to inquire about the payment status and resolve any issues.
+
+Payment Processing:
+a. Once the client submits the payment, the Accounts Receivable Team records the transaction in the ledger.
+b. In case of partial payments or discrepancies, the team communicates with the client to reconcile and resolve the issues.
+
+Reconciliation and Reporting:
+a. The Finance Department reconciles the accounts receivable ledger regularly with the general ledger.
+b. Any discrepancies are investigated and corrected promptly.
+c. Monthly reports are generated to assess the accounts receivable aging, cash flow, and overall collections performance.
+
+Documentation:
+
+Copies of all issued invoices.
+Records of client communications related to overdue payments.
+Monthly reports on accounts receivable aging, cash flow, and collections performance.
+Review and Continuous Improvement:
+This SOP should be reviewed periodically to ensure its effectiveness. Feedback from team members, stakeholders, and any identified areas for improvement should be considered and incorporated into the process.

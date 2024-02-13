@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 import time
 import numpy as np
-from langchain.document_loaders import PyPDFLoader, Docx2txtLoader
+from langchain.document_loaders import PyPDFLoader, Docx2txtLoader, TextLoader
 from langchain_community.document_loaders.csv_loader import CSVLoader
 
 
@@ -21,10 +21,13 @@ EMBEDDINGS_MODEL_DEPLOYMENT_NAME = os.getenv("EMBEDDINGS_MODEL_DEPLOYMENT_NAME")
 OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY")
 
 # Load documents from the 'docs' directory
+persona = "manager"
+path = 'docs/'+ persona
+
 documents = []
-for file in os.listdir('docs'):
+for file in os.listdir(path):
     if file.lower().endswith('.pdf'):
-        input_file_path = os.path.join('docs', file)
+        input_file_path = os.path.join(path, file)
         loader = PyPDFLoader(input_file_path)
         documents.extend(loader.load())
     elif file.endswith('.docx') or file.endswith('.doc'):
@@ -33,9 +36,15 @@ for file in os.listdir('docs'):
         documents.extend(loader.load())
     elif file.endswith('.csv'):
         print(file)
-        input_file_path = os.path.join('docs', file)
+        input_file_path = os.path.join(path, file)
         loader = CSVLoader(input_file_path)
         documents.extend(loader.load())
+    elif file.endswith('.txt') or file.endswith('.md'):
+        print(file)
+        input_file_path = os.path.join(path, file)
+        loader = TextLoader(input_file_path)
+        documents.extend(loader.load())
+    
 
 # Split documents using the CharacterTextSplitter
 text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
@@ -79,4 +88,4 @@ while chunks_processed < total_chunks:
     time.sleep(10)
 
 # Save the final index to a local file
-final_db.save_local("faiss_index")
+final_db.save_local("faiss_index/faiss_index_"+persona)
