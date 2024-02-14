@@ -89,7 +89,10 @@ with placeholder_main.container():
         print(e)
     btn = st.button("Submit",use_container_width= True )
     
-    
+FAQ_agent= ["How can i improve performance"]
+FAQ_cxo = ['How does the finances looks like']
+FAQ_manager = ['How is my team performing']
+
 if btn:
     placeholder_main.empty()
     cam = cv2.VideoCapture(0)
@@ -107,20 +110,30 @@ if btn:
         name = video_frame_callback(frame)
         #Display name and ID of the person
         if name is not None:
-            placeholder.empty()
-            placeholder = st.image('static/Check.gif')
-            time.sleep(3)
-            cam.release()
-            placeholder.empty()
-            placeholder = st.image('static/Bot.gif')
-            placeholder.empty()
-            text_to_speech(f"Hey {name}, How can I assist you?")
-            persona = get_persona(name)
-            load_changes(persona)
-            voice_caller()
-            placeholder.empty()
-            placeholder = st.image('static/loader.gif')
-            time.sleep(10)
-            placeholder.empty()
-            placeholder = st.image('static/face1.gif')
-            cam = cv2.VideoCapture(0)
+            col1,col2,col3 = st.columns(3)
+            # Add FAQ classification
+            
+
+
+            with col1:
+                with st.container():
+                    st.markdown(FAQ)
+
+            with col2:
+                placeholder.empty()
+                placeholder = st.image('static/Check.gif')
+                time.sleep(3)
+                cam.release()
+                placeholder.empty()
+                placeholder = st.image('static/Bot.gif')
+                placeholder.empty()
+                text_to_speech(f"Hey {name}, How can I assist you?")
+                persona = get_persona(name)
+                load_changes(persona)
+                voice_caller()
+                placeholder.empty()
+                placeholder = st.image('static/loader.gif')
+                time.sleep(10)
+                placeholder.empty()
+                placeholder = st.image('static/face1.gif')
+                cam = cv2.VideoCapture(0)
