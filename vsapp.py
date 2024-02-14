@@ -82,6 +82,7 @@ with placeholder_main.container():
         temp_data = Registration()
         if temp_data is not None:
             persona_data  = pd.concat([persona_data , temp_data])
+            persona_data = persona_data.drop_duplicates()
             persona_data.to_csv('data\persona.csv', index=False)
             # streamlit_js_eval(js_expressions="parent.window.location.reload()")
     except Exception as e:
