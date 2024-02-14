@@ -21,7 +21,7 @@ df = pd.read_csv(file_path)
 def get_persona(name):
     person_row = df[df['Name'] == name]
     if not person_row.empty:
-        return person_row['Persona'].values[0]
+        return person_row['Persona'].values[-1]
     else:
         return 'Person not found'
 
