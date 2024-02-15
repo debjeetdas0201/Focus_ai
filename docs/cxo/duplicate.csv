@@ -1,0 +1,3 @@
+client,quarter,count of duplicate Payments,amount,Risk level
+beta,last quarter,200,$3.4Million,High 
+beta,this quarter,2400,$7Million,Potential duplicates

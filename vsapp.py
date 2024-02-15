@@ -37,8 +37,8 @@ def add_bg_from_local(image_file):
     unsafe_allow_html=True
     )
 
-add_bg_from_local('static/background.jpg')
 
+add_bg_from_local('static/background.jpg')
 
 hide_streamlit_style = """
             <style>
@@ -118,7 +118,6 @@ if btn:
             #######################
             # FAQ to show
             ######################
-
             FAQ_agent= """
                 - Assess my performance status.
                 - Any crucial emails?
