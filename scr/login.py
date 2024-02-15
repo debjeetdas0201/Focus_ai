@@ -17,6 +17,7 @@ def Registration():
     st.markdown('<p style="color:white;">CAPTURE YOUR IMAGE</p>', unsafe_allow_html=True)
     img_file_buffer = st.camera_input(label = "___________________")
     
+    
     if img_file_buffer is not None:
         # To read image file buffer as a PIL Image:
         img = Image.open(img_file_buffer)
@@ -33,15 +34,20 @@ def Registration():
         
         # saving the image in folder
         if user_name:
-            #Delete faces folder and reinitiate it
             photo_dir = 'faces'
-            if os.path.exists(photo_dir):
-                shutil.rmtree(photo_dir)
             
-            os.makedirs(photo_dir)
+            # # Deleting already created faces folder and creating new
+            # if os.path.exists(photo_dir):
+            #     shutil.rmtree(photo_dir)
+
+            # os.mkdir(photo_dir)
+
             img.save(os.path.join(photo_dir,f"{user_name}.jpeg"))
+
 
         if role_value:
             temp_data = pd.DataFrame({'Name':[user_name], 'Persona': [role_value]})
-            
             return temp_data
+        
+
+

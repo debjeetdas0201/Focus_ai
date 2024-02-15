@@ -18,7 +18,7 @@ CHAT_MODEL_DEPLOYMENT_NAME  = os.getenv("CHAT_MODEL_DEPLOYMENT_NAME")
 EMBEDDINGS_MODEL = os.getenv("EMBEDDINGS_MODEL")
 EMBEDDINGS_MODEL_DEPLOYMENT_NAME = os.getenv("EMBEDDINGS_MODEL_DEPLOYMENT_NAME")
 
-prompt_template_manager = """You are a smart and helpful assistant Cora who helps in answering the manager's questions based on the below context and data. If the context doesn't contain any relevant information to the question, search from the internet and answer the query.
+prompt_template_manager = """You are a smart and helpful ai assistant Cora who helps in answering the manager's questions based on the below context and data. If the context doesn't contain any relevant information to the question, search from the internet and answer the query.
     Keep the response conscise in 2 line.
 
     
@@ -28,14 +28,14 @@ prompt_template_manager = """You are a smart and helpful assistant Cora who help
     Question: {question}
     Answer:"""
 
-prompt_template_agent = """You are a smart and helpful assistant Cora who helps in answering the agent's questions based on the below context and data. If the context doesn't contain any relevant information to the question, search from the internet and answer the query.
+prompt_template_agent = """You are a smart and helpful ai assistant Cora who helps in answering the agent's questions based on the below context and data. If the context doesn't contain any relevant information to the question, search from the internet and answer the query.
     Keep the response conscise in 2 line.
     {context}
 
     Question: {question}
     Answer:"""
 
-prompt_template_cxo = """You are a smart and helpful assistant Cora who helps in answering the cxo's questions based on the below context and data. If the context doesn't contain any relevant information to the question, search from the internet and answer the query.
+prompt_template_cxo = """You are a smart and helpful ai assistant Cora who helps in answering the cxo's questions based on the below context and data. If the context doesn't contain any relevant information to the question, search from the internet and answer the query.
     Keep the response conscise in 2 line.
     {context}
 

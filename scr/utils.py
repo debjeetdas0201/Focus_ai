@@ -11,14 +11,16 @@ load_dotenv()
 
 
 
-# Assuming your CSV file is named 'your_file.csv'
-file_path = 'data/persona.csv'
 
-# Read CSV into DataFrame
-df = pd.read_csv(file_path)
 
 # Function to get persona based on name
 def get_persona(name):
+    # Assuming your CSV file is named 'your_file.csv'
+    file_path = 'data/persona.csv'
+
+    # Read CSV into DataFrame
+    df = pd.read_csv(file_path)
+
     person_row = df[df['Name'] == name]
     if not person_row.empty:
         return person_row['Persona'].values[-1]
