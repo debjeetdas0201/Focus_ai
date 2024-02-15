@@ -4,6 +4,7 @@ import numpy as np
 import os
 import pandas as pd
 from cv2 import *
+import shutil
 
 persona_data = pd.read_csv('data\persona.csv')
 
@@ -15,7 +16,6 @@ def Registration():
 
     st.markdown('<p style="color:white;">CAPTURE YOUR IMAGE</p>', unsafe_allow_html=True)
     img_file_buffer = st.camera_input(label = "___________________")
-    
     
     if img_file_buffer is not None:
         # To read image file buffer as a PIL Image:
@@ -33,26 +33,15 @@ def Registration():
         
         # saving the image in folder
         if user_name:
+            #Delete faces folder and reinitiate it
             photo_dir = 'faces'
+            if os.path.exists(photo_dir):
+                shutil.rmtree(photo_dir)
+            
+            os.makedirs(photo_dir)
             img.save(os.path.join(photo_dir,f"{user_name}.jpeg"))
-
 
         if role_value:
             temp_data = pd.DataFrame({'Name':[user_name], 'Persona': [role_value]})
+            
             return temp_data
-
-
-# try:
-#     temp_data = Registration()
-#     if temp_data is not None:
-#         if st.button("Submit"):
-#             persona_data  = pd.concat([persona_data , temp_data])
-#                 # persona_data = persona_data.drop_duplicates()
-#             persona_data.to_csv('data\persona.csv', index=False)
-#             streamlit_js_eval(js_expressions="parent.window.location.reload()")
-
-# except Exception as e:
-#     print(e)
-        
-
-

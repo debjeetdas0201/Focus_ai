@@ -23,7 +23,7 @@ def get_persona(name):
     if not person_row.empty:
         return person_row['Persona'].values[-1]
     else:
-        return 'Person not found'
+        return 'cxo'
 
 SPEECH_KEY = os.getenv("SPEECH_KEY")
 SPEECH_REGION = os.getenv("SPEECH_REGION")
