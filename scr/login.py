@@ -27,11 +27,16 @@ def Registration():
         user_name = st.text_input(label = "___________________")
         st.markdown('<p style="color:white;">SELECT YOUR PERSONA</p>', unsafe_allow_html=True)
         role_value = st.selectbox(label = "___________________",
-                                options= ('CXO', 'Manager', 'Agent'), 
+                                options= ('Global Operating Lead', 'Manager', 'Agent'), 
                                 index = None,
                                 placeholder= 'Choose an option',
                                 label_visibility='collapsed')
+        if role_value == 'Global Operating Lead':
+            role_value = 'cxo'
         
+        role_value = role_value.lower()
+
+    
         # saving the image in folder
         if user_name:
             photo_dir = 'faces'

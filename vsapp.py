@@ -35,7 +35,6 @@ def add_bg_from_local(image_file):
     unsafe_allow_html=True
     )
 
-
 add_bg_from_local('static/background.jpg')
 
 hide_streamlit_style = """
@@ -55,7 +54,6 @@ with col2:
     st.image(png_logo)
 with col3:
     st.write("")
-
 
 def voice_caller():
     while True:
@@ -84,8 +82,8 @@ with placeholder_main.container():
     except Exception as e:
         print(e)
     btn = st.button("Submit",use_container_width= True )
-    
-    
+
+
 if btn:
     placeholder_main.empty()
     cam = cv2.VideoCapture(0)
@@ -110,7 +108,7 @@ if btn:
             placeholder.empty()
             placeholder = st.image('static/Bot.gif')
             placeholder.empty()
-
+            
             persona = get_persona(name)
             print(persona)
             #######################
@@ -151,10 +149,7 @@ if btn:
                         - Project
                         - SOP & learnings
                         '''
-
-
-
-
+            
             # Add FAQ classification
             if persona.lower() == 'cxo':
                 FAQ = FAQ_cxo
@@ -172,9 +167,11 @@ if btn:
                     st.markdown(FAQ)
                 
                 st.write("")
+                st.write("")
                 st.image('static\datasource1.png')
                 with st.container(border=True):
                     st.markdown(data)
+
 
             text_to_speech(f"Hey {name}, How can I assist you?")
             load_changes(persona)
