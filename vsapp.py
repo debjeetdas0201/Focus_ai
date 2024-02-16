@@ -20,8 +20,6 @@ st.set_page_config(
         #layout="wide",
 )
 
-
-
 def add_bg_from_local(image_file):
     with open(image_file, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
@@ -134,18 +132,49 @@ if btn:
                 - Team's learning trajectory?
                 """
 
+            data_manager='''
+                        - Attrition
+                        - Budget
+                        - Employee performance & Learning
+                        - Clients & Project
+                        '''
+            
+            data_cxo='''
+                        - Benchmark & KPI
+                        - Market expansion & Strategic plans
+                        - Financial reports & payments
+                        - Communications & emials
+                        '''
+            
+            data_agent='''
+                        - Self Performance
+                        - Project
+                        - SOP & learnings
+                        '''
+
+
+
+
             # Add FAQ classification
             if persona.lower() == 'cxo':
                 FAQ = FAQ_cxo
+                data = data_cxo
             elif persona.lower() == 'manager':
                 FAQ = FAQ_manager
+                data = data_manager
             else:
                 FAQ = FAQ_agent
+                data = data_agent
 
             with st.sidebar:
                 st.image('static\FAQ_logo.png')
                 with st.container(border=True):
                     st.markdown(FAQ)
+                
+                st.write("")
+                st.image('static\datasource1.png')
+                with st.container(border=True):
+                    st.markdown(data)
 
             text_to_speech(f"Hey {name}, How can I assist you?")
             load_changes(persona)
