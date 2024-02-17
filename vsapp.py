@@ -12,7 +12,7 @@ from scr.login import Registration
 
 
 image1 = Image.open('static/logo.jpeg')
-png_logo = Image.open('static/logo4.png')
+png_logo = Image.open('static/logo_final.png')
 
 st.set_page_config(
         page_title="CORA AI",
@@ -172,7 +172,7 @@ if btn:
                 with st.container(border=True):
                     st.markdown(data)
 
-                    
+
             text_to_speech(f"Hey {name}, How can I assist you?")
             load_changes(persona)
             voice_caller()
