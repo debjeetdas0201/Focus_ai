@@ -1,8 +1,8 @@
 Vendor Name,Top Trends, severity
-Vendor A,1. Late payment notifications 2. Invoice reconciliation issue 3. Payment disputes,high
-Vendor B,1. Missing invoices 2. Payment processing delays 3. Vendor onboarding problems,high
-Vendor C,1. Duplicate invoices 2. Tax compliance queries 3. Vendor master data updates,low
-Vendor D,1. Currency exchange rate fluctuations 2. Payment term negotiations 3. Invoice approval bottlenecks,medium
-Vendor E,1. Unapplied payments 2. Credit memo processing 3. Vendor statement reconciliation,medium
-Vendor F,1. Purchase order mismatches 2. Expense report processing delays 3. Payment follow-up requests,low
-Vendor G,1. Incorrect payment amounts 2. Payment scheduling errors 3. Payment status inquiries,high
+Alpha,1. Late payment notifications 2. Invoice reconciliation issue 3. Payment disputes,high
+Beta,1. Missing invoices 2. Payment processing delays 3. Vendor onboarding problems,high
+Carmill,1. Duplicate invoices 2. Tax compliance queries 3. Vendor master data updates,low
+Densan,1. Currency exchange rate fluctuations 2. Payment term negotiations 3. Invoice approval bottlenecks,medium
+Enfield Richman,1. Unapplied payments 2. Credit memo processing 3. Vendor statement reconciliation,medium
+Freeman Corp,1. Purchase order mismatches 2. Expense report processing delays 3. Payment follow-up requests,low
+Gilco,1. Incorrect payment amounts 2. Payment scheduling errors 3. Payment status inquiries,high

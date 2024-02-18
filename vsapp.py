@@ -75,9 +75,9 @@ with placeholder_main.container():
     try:
         temp_data = Registration()
         if temp_data is not None:
-            persona_data  = pd.concat([persona_data , temp_data])
-            persona_data = persona_data.drop_duplicates(keep='last')
-            persona_data.to_csv('data\persona.csv', index=False)
+            # persona_data  = pd.concat([persona_data , temp_data])
+            # persona_data = persona_data.drop_duplicates(keep='last', subset="name")
+            temp_data.to_csv('data\persona.csv', index=False)
             # streamlit_js_eval(js_expressions="parent.window.location.reload()")
     except Exception as e:
         print(e)
@@ -136,7 +136,7 @@ if btn:
                         - Employee performance & Learning
                         - Clients & Project
                         '''
-            
+
             data_cxo='''
                         - Benchmark & KPI
                         - Market expansion & Strategic plans
@@ -171,7 +171,6 @@ if btn:
                 st.image('static\datasource1.png')
                 with st.container(border=True):
                     st.markdown(data)
-
 
             text_to_speech(f"Hey {name}, How can I assist you?")
             load_changes(persona)
