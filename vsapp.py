@@ -9,7 +9,19 @@ from scr.camera import video_frame_callback
 import base64
 import pandas as pd
 from scr.login import Registration
+import os
 
+def face_dir_removal():
+    """
+    to add
+    """
+    directory_path = 'faces'
+    for filename in os.listdir(directory_path):
+        if os.path.isfile(os.path.join(directory_path, filename)):
+            os.remove(os.path.join(directory_path, filename))
+
+# Checiking if any images are presenyt -> yes, then delete images.
+# face_dir_removal()
 
 image1 = Image.open('static/logo.jpeg')
 png_logo = Image.open('static/logo_final.png')
@@ -65,18 +77,19 @@ def voice_caller():
             print(e)
             continue
 
+
 # persona_data = pd.read_csv('data\persona.csv')
 
 #You can check .empty documentation
 placeholder_main = st.empty()
 
-
 with placeholder_main.container():
     try:
         temp_data = Registration()
-        if temp_data is not None:
-            # persona_data  = pd.concat([persona_data , temp_data])
-            # persona_data = persona_data.drop_duplicates(keep='last', subset="name")
+        print(temp_data)
+        if temp_data.shape[0] > 0:
+        #     persona_data  = pd.concat([persona_data , temp_data])
+        #     persona_data = persona_data.drop_duplicates(keep='last')
             temp_data.to_csv('data\persona.csv', index=False)
             # streamlit_js_eval(js_expressions="parent.window.location.reload()")
     except Exception as e:
@@ -92,6 +105,7 @@ if btn:
     FRAME_WINDOW = st.image([])
     placeholder = st.image('static/final face.gif')
     time.sleep(3)
+
 
 
     while True:
@@ -173,8 +187,9 @@ if btn:
                 st.image('static\datasource1.png')
                 with st.container(border=True):
                     st.markdown(data)
+                    
 
-            text_to_speech(f"Hey {name}, How can I assist you?")
+            text_to_speech(f"Hey, How can I assist you?")
             load_changes(persona)
             voice_caller()
             placeholder.empty()

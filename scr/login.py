@@ -36,7 +36,6 @@ def Registration():
             role_value = 'cxo'
         # role_value = role_value.lower()
 
-    
         # saving the image in folder
         # if user_name:
         #     photo_dir = 'faces'
@@ -49,6 +48,7 @@ def Registration():
 
         #     img.save(os.path.join(photo_dir,f"{user_name}.jpeg"))
         if role_value:
+            print('True')
             photo_dir = 'faces'
             img.save(os.path.join(photo_dir,f"{user_name}.jpeg"))
             temp_data = pd.DataFrame({'Name':[user_name], 'Persona': [role_value]})
