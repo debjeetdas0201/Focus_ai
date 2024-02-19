@@ -65,11 +65,11 @@ def voice_caller():
             print(e)
             continue
 
-
-persona_data = pd.read_csv('data\persona.csv')
+# persona_data = pd.read_csv('data\persona.csv')
 
 #You can check .empty documentation
 placeholder_main = st.empty()
+
 
 with placeholder_main.container():
     try:
@@ -92,6 +92,8 @@ if btn:
     FRAME_WINDOW = st.image([])
     placeholder = st.image('static/final face.gif')
     time.sleep(3)
+
+
     while True:
         ret, frame = cam.read()
         if not ret:

@@ -11,8 +11,6 @@ load_dotenv()
 
 
 
-
-
 # Function to get persona based on name
 def get_persona(name):
     # Assuming your CSV file is named 'your_file.csv'

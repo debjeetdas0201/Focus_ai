@@ -7,7 +7,7 @@ from cv2 import *
 import shutil
 import glob
 
-persona_data = pd.read_csv('data\persona.csv')
+# persona_data = pd.read_csv('data\persona.csv')
 
 def Registration():
     """
@@ -34,7 +34,6 @@ def Registration():
                                 label_visibility='collapsed')
         if role_value == 'Global Operating Leader':
             role_value = 'cxo'
-        
         # role_value = role_value.lower()
 
     
@@ -49,7 +48,6 @@ def Registration():
         #     # os.mkdir(photo_dir)
 
         #     img.save(os.path.join(photo_dir,f"{user_name}.jpeg"))
-
         if role_value:
             photo_dir = 'faces'
             img.save(os.path.join(photo_dir,f"{user_name}.jpeg"))
